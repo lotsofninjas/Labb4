@@ -34,6 +34,8 @@ namespace Labb_4
             Hair hair;
             string hairColor = "";
             int hairLenght;
+            string searchName;
+            int counter;
             #endregion
 
             while (switchLoop)
@@ -111,12 +113,7 @@ namespace Labb_4
                 lastName = IsStringAString();
                 Console.Write("Födelseår: ");
                 CheckYear();
-                Console.WriteLine("Och så månad:");
-                for (int i = 0; i < monthList.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}) {monthList[i]}");
-                }
-                Console.Write("svara med siffan: ");
+                Console.Write("Och så månadens siffa: ");
                 CheckMonth();
                 Console.Write("Datum: ");
                 CheckDay();
@@ -182,7 +179,7 @@ namespace Labb_4
                         }
                         else
                         {
-                            Console.Write($"{monthList[month - 1]} hade 30 dagar senaste jag kollade.Försök igen: ");
+                            Console.Write($"{monthList[month - 1]} hade 31 dagar senaste jag kollade.Försök igen: ");
                         }
                     }
                     else if (month == 4 || month == 6 || month == 9 || month == 11)
@@ -262,11 +259,76 @@ namespace Labb_4
             }
             void SearchPerson()
             {
+                Console.Clear();
+                counter = 0;
+                if (personList.Count == 0)
+                {
+                    Console.WriteLine("Det finns inga personer i listan.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.Write("Ange förnamn att söka efter: ");
+                    searchName = IsStringAString();
+                    Console.Clear();
+                    foreach (Person person in personList)
+                    {
+                        if (person.FirstName == searchName)
+                        {
+
+                            Console.Write(person);
+                            Console.WriteLine("\n\nEnter för att fortsätta.");
+                            Console.ReadLine();
+                            Console.Clear();
+                            counter++;
+                        }
+                        else if (counter == 0)
+                        {
+                            Console.WriteLine($"{searchName} finns inte med i listan");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                    }
+                }
 
             }
             void DeletePerson()
             {
-
+                Console.Clear();
+                counter = 0;
+                if (personList.Count == 0)
+                {
+                    Console.WriteLine("Det finns inga personer i listan.");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.Write("Ange förnamn att söka efter: ");
+                    searchName = IsStringAString();
+                    foreach (Person person in personList)
+                    {
+                        if (person.FirstName == searchName)
+                        {
+                            personList.Remove(person);
+                            Console.WriteLine($"\n{searchName} är borttagen");
+                            Console.ReadLine();
+                            Console.Clear();
+                            if (personList.Count == 0)
+                            {
+                                break;
+                            }
+                            counter++;
+                        }
+                        else if (counter == 0)
+                        {
+                            Console.WriteLine($"{searchName} finns inte med i listan");
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                    }
+                }
             }
             int CheckIfInt()
             {
@@ -305,7 +367,5 @@ namespace Labb_4
                 }
             }
         }
-
     }
-
 }

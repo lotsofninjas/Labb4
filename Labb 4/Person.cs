@@ -9,7 +9,7 @@ namespace Labb_4
 {
     public class Person
     {
-        private string FirstName { get; set; }
+        public string FirstName { get; set; }
         private string LastName { get; set; }
         private DateTime DateOfBirth { get; set; }
         private string EyeColor { get; set; }
