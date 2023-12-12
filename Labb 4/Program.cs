@@ -13,34 +13,35 @@ namespace Labb_4
     {
         private static void Main(string[] args)
         {
-            #region variables and list
+            #region variables and lists
             List<Person> personList = new List<Person>();
-            int choice;
+            string[] monthList = new string[] { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
+            ConsoleKeyInfo input;
+            char inputChar;
+            int choice = 0;
             bool switchLoop = true;
             string firstName;
             string lastName;
             int year;
             int month;
-            string strDay;
+            string strToInt;
+            int intFromString;
             int day = 0;
+            string testString;
             string eyeColor;
             DateTime dateOfBirth;
             Gender gender;
             Hair hair;
-            string hairColor;
+            string hairColor = "";
             int hairLenght;
             #endregion
 
             while (switchLoop)
             {
-                Console.WriteLine("Angelic Good Guys Machine 2000" +
-                    "\nGör menyval" +
-                    "\n1) Lägga till person till listan" +
-                    "\n2) Skriv ut listan i sin helhet" +
-                    "\n3) Sök person i listan" +
-                    "\n4) Radera person från listan" +
-                    "\n0) Avsluta programmet");
+                PrintMenu();
+
                 CheckInput();
+
                 switch (choice)
                 {
                     case 1:
@@ -53,6 +54,7 @@ namespace Labb_4
                         SearchPerson();
                         break;
                     case 4:
+                        DeletePerson();
                         break;
                     case 0:
                         switchLoop = false;
@@ -60,9 +62,33 @@ namespace Labb_4
                 }
             }
             Console.ReadLine();
+
+            void PrintMenu()
+            {
+                Console.Write("Angelic Good Guys Machine 2000" +
+                    "\nGör menyval" +
+                    "\n1) Lägga till person till listan" +
+                    "\n2) Skriv ut listan i sin helhet" +
+                    "\n3) Sök person i listan" +
+                    "\n4) Radera person från listan" +
+                    "\n0) Avsluta programmet" +
+                    "\nVal: ");
+            }
             void CheckInput()
             {
-                while (!int.TryParse(Console.ReadLine(), out choice) || choice < 0 || choice > 4)
+                input = Console.ReadKey();
+                inputChar = input.KeyChar;
+                if (!char.IsDigit(inputChar))
+                {
+                    Console.Write("Använd siffror: ");
+                    return;
+                }
+                else
+                {
+                    choice = int.Parse(inputChar.ToString());
+                    Console.WriteLine();
+                }
+                while (choice < 0 || choice > 4)
                 {
 
                     Console.Write("1 till 4 finns att välja på: ");
@@ -71,132 +97,120 @@ namespace Labb_4
             }
             void AddPerson()
             {
+                Console.Clear();
                 Console.Write("Förnamn: ");
-                firstName = Console.ReadLine();
+                firstName = IsStringAString();
                 Console.Write("Efternamn: ");
-                lastName = Console.ReadLine();
+                lastName = IsStringAString();
                 Console.Write("Födelseår: ");
                 CheckYear();
-                Console.Write("Och så månad:" +
-                    "\n1) Januari" +
-                    "\n2) Februari" +
-                    "\n3) Mars" +
-                    "\n4) April" +
-                    "\n5) Maj" +
-                    "\n6) Juni" +
-                    "\n7) Juli" +
-                    "\n8) Augusti" +
-                    "\n9) September" +
-                    "\n10) Oktober" +
-                    "\n11) November" +
-                    "\n12) December" +
-                    "\nsvara med siffan: ");
+                Console.WriteLine("Och så månad:");
+                for (int i = 0; i < monthList.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}) {monthList[i]}");
+                }
+                Console.Write("svara med siffan: ");
                 CheckMonth();
                 Console.Write("Datum: ");
                 CheckDay();
                 Console.Write("Och så har vi ögonfärg: ");
-                eyeColor = Console.ReadLine();
+                eyeColor = IsStringAString();
                 Console.Write("Kön: ");
                 CheckGender();
                 Console.Write("Hårfärg: ");
-                hairColor = Console.ReadLine();
-                Console.Write("Längd på håret: ");
+                hairColor = IsStringAString();
+                Console.Write("Hårlängd i cm: ");
                 CheckHair();
                 CreateInstance();
 
             }
             void CheckYear()
             {
-                while (!int.TryParse(Console.ReadLine(), out year) || year.ToString().Length != 4)
+                do
                 {
-                    Console.Write("Endast fyrsiffriga tal: ");
+                    year = CheckIfInt();
+                    if (year.ToString().Length != 4)
+                    {
+                        Console.Write("Endast fyrsiffriga tal: ");
+                    }
+                    else
+                    {
+                        break;
+                    }
                     continue;
                 }
+                while (true) ;
             }
             void CheckMonth()
             {
-                while (!int.TryParse(Console.ReadLine(), out month) || month < 1 || month > 12)
+                do
                 {
-                    Console.Write("1 till 12 fanns att välja på: ");
-                    continue;
+                    month = CheckIfInt();
+                    if (month < 1 || month > 12)
+                    {
+                        Console.Write("1 till 12 fanns att välja på: ");
+                        continue;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+                while (true);
             }
             void CheckDay()
             {
-                if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+                do
                 {
-                    while (true)
+                    day = CheckIfInt();
+                    if (day < 1)
                     {
-                        day = CheckIfInt();
-                        if (day < 1)
-                        {
-                            Console.Write("Tror nog månaden har minst en dag, försök igen: ");
-                        }
-                        else if (day > 31)
-                        {
-                            Console.Write("Riktigt så många dagar tror jag inte månaden har, försök igen: ");
-                        }
-                        else
+                        Console.Write($"Tror nog {monthList[month - 1]} har minst en dag, försök igen: ");
+                    }
+                    else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+                    {
+                        if (day <= 31)
                         {
                             break;
-                        }   
-                    }
-                }
-                else if (month == 4 || month == 6 || month == 9 || month == 11)
-                {
-                    while (true)
-                    {
-                        strDay = Console.ReadLine();
-                        if (int.TryParse(strDay, out day))
-                        {
-                            if (day < 1)
-                            {
-                                Console.Write("Tror nog månaden har minst en dag, försök igen: ");
-                            }
-                            else if (day > 30)
-                            {
-                                Console.Write("Riktigt så många dagar tror jag inte månaden har, försök igen: ");
-                            }
-                            
                         }
                         else
                         {
-                            Console.Write("Siffror min vän. Försök igen: ");
+                            Console.Write($"{monthList[month - 1]} hade 30 dagar senaste jag kollade.Försök igen: ");
                         }
                     }
-                }
-                else
-                {
-                    while(true)
+                    else if (month == 4 || month == 6 || month == 9 || month == 11)
                     {
-                        strDay = Console.ReadLine();
-                        if (int.TryParse(strDay, out day))
+                        if (day <= 30)
                         {
-                            if (day < 1)
+                            break;
+                        }
+                        else
+                        {
+                            Console.Write($"{monthList[month - 1]} hade 30 dagar senaste jag kollade.Försök igen: ");
+                        }    
+                    }
+                    else if (month == 2)
+                    {
+                        if (day > 28)
+                        {
+                            if (day == 29)
                             {
-                                Console.Write("Tror nog månaden har minst en dag, försök igen: ");
-                            }
-                            else if (day > 28)
-                            {
-                                if (day == 29)
+                                if ((year % 4 != 0 || year % 100 == 0) && year % 400 != 0)
                                 {
-                                    if ((year % 4 != 0 || year % 100 == 0) && year % 400 != 0)
-                                    {
-                                        Console.Write($"{year} var inte ett skottår så några 29 dagar fanns det inte i februari då, försök igen: ");
-                                    }
+                                    Console.Write($"{year} var inte ett skottår så några 29 dagar fanns det inte i februari då, försök igen: ");
                                 }
                             }
                             else
                             {
-                                break;
+                                Console.Write("Nja inte har väl februari någonsin mer än 29 dagar. Försök igen: ");
                             }
                         }
                         else
                         {
-                            Console.Write("Siffror min vän. Försök igen: ");
+                            break;
                         }
                     }
-                }
+                }while (true);
             }
             void CheckGender()
             {
@@ -224,15 +238,26 @@ namespace Labb_4
                 };
                 Person person = new Person(firstName, lastName, dateOfBirth, eyeColor, gender, hair);
                 personList.Add(person);
+                Console.Clear();
+                Console.WriteLine($"{firstName} är sparad i personlistan\n");
             }
             void ListPersons()
             {
+                Console.Clear();
                 foreach (Person person in personList)
                 {
                     Console.WriteLine(person);
+                    Console.WriteLine();
                 }
+                Console.Write("Enter för att komma vidare.");
+                Console.ReadLine();
+                Console.Clear();
             }
             void SearchPerson()
+            {
+
+            }
+            void DeletePerson()
             {
 
             }
@@ -240,10 +265,10 @@ namespace Labb_4
             {
                 while (true)
                 {
-                    strDay = Console.ReadLine();
-                    if (int.TryParse(strDay, out day))
+                    strToInt = Console.ReadLine();
+                    if (int.TryParse(strToInt, out intFromString))
                     {
-                        return day;
+                        return intFromString;
                     }
                     else
                     {
@@ -251,9 +276,27 @@ namespace Labb_4
                     }
                 }
             }
-                
-
-
+            string IsStringAString()
+            {
+                while(true) 
+                {
+                    testString = Console.ReadLine();
+                    if (string.IsNullOrEmpty(testString))
+                    {
+                        Console.Write("Något behöver du allt skriva: ");
+                        continue;
+                    }
+                    else if (testString.All(char.IsLetter))
+                    {
+                        return testString;
+                    }
+                    else
+                    {
+                        Console.Write("Inga sifror här. Försök igen: ");
+                        continue;
+                    }
+                }
+            }
         }
 
     }
