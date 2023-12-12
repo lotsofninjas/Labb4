@@ -21,6 +21,7 @@ namespace Labb_4
             string lastName;
             int year;
             int month;
+            string strDay;
             int day = 0;
             string eyeColor;
             DateTime dateOfBirth;
@@ -89,7 +90,7 @@ namespace Labb_4
                     "\n10) Oktober" +
                     "\n11) November" +
                     "\n12) December" +
-                    "\nsvara med siffan :");
+                    "\nsvara med siffan: ");
                 CheckMonth();
                 Console.Write("Datum: ");
                 CheckDay();
@@ -124,55 +125,75 @@ namespace Labb_4
             {
                 if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
                 {
-                    while (!int.TryParse(Console.ReadLine(), out day))
+                    while (true)
                     {
+                        day = CheckIfInt();
                         if (day < 1)
                         {
                             Console.Write("Tror nog månaden har minst en dag, försök igen: ");
-                            continue;
                         }
                         else if (day > 31)
                         {
-                            Console.Write("Riktigt så många dagar tror jag inte månaden har försök igen: ");
-                            continue;
+                            Console.Write("Riktigt så många dagar tror jag inte månaden har, försök igen: ");
                         }
+                        else
+                        {
+                            break;
+                        }   
                     }
                 }
                 else if (month == 4 || month == 6 || month == 9 || month == 11)
                 {
-                    while (!int.TryParse(Console.ReadLine(), out day))
+                    while (true)
                     {
-                        if (day < 1)
+                        strDay = Console.ReadLine();
+                        if (int.TryParse(strDay, out day))
                         {
-                            Console.Write("Tror nog månaden har minst en dag, försök igen: ");
-                            continue;
+                            if (day < 1)
+                            {
+                                Console.Write("Tror nog månaden har minst en dag, försök igen: ");
+                            }
+                            else if (day > 30)
+                            {
+                                Console.Write("Riktigt så många dagar tror jag inte månaden har, försök igen: ");
+                            }
+                            
                         }
-                        else if (day > 31)
+                        else
                         {
-                            Console.Write("Riktigt så många dagar tror jag inte månaden har försök igen: ");
-                            continue;
+                            Console.Write("Siffror min vän. Försök igen: ");
                         }
                     }
                 }
                 else
                 {
-                    while (!int.TryParse(Console.ReadLine(), out day))
+                    while(true)
                     {
-                        if (day < 1)
+                        strDay = Console.ReadLine();
+                        if (int.TryParse(strDay, out day))
                         {
-                            Console.Write("Tror nog månaden har minst en dag, försök igen: ");
-                            continue;
-                        }
-                        else if (day > 28)
-                        {
-                            if (day == 29)
+                            if (day < 1)
                             {
-                                if ((year % 4 != 0 || year % 100 == 0) && year % 400 != 0)
+                                Console.Write("Tror nog månaden har minst en dag, försök igen: ");
+                            }
+                            else if (day > 28)
+                            {
+                                if (day == 29)
                                 {
-                                    Console.Write($"{year} var inte ett skottår så några 29 dagar fanns det inte i februari då, försök igen: ");
-                                    continue;
+                                    if ((year % 4 != 0 || year % 100 == 0) && year % 400 != 0)
+                                    {
+                                        Console.Write($"{year} var inte ett skottår så några 29 dagar fanns det inte i februari då, försök igen: ");
+                                    }
                                 }
                             }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            Console.Write("Siffror min vän. Försök igen: ");
                         }
                     }
                 }
@@ -215,6 +236,22 @@ namespace Labb_4
             {
 
             }
+            int CheckIfInt()
+            {
+                while (true)
+                {
+                    strDay = Console.ReadLine();
+                    if (int.TryParse(strDay, out day))
+                    {
+                        return day;
+                    }
+                    else
+                    {
+                        Console.Write("Siffror min vän. Försök igen: ");
+                    }
+                }
+            }
+                
 
 
         }

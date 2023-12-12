@@ -1,0 +1,5 @@
+C:\Users\Pelle\OneDrive\Kod\Source\Repos\Labb 4\Labb 4\bin\Release\net6.0\app.publish\Labb 4.exe
+C:\Users\Pelle\OneDrive\Kod\Source\Repos\Labb 4\Labb 4\bin\Release\net6.0\app.publish\Labb 4.dll
+C:\Users\Pelle\OneDrive\Kod\Source\Repos\Labb 4\Labb 4\bin\Release\net6.0\app.publish\Labb 4.deps.json
+C:\Users\Pelle\OneDrive\Kod\Source\Repos\Labb 4\Labb 4\bin\Release\net6.0\app.publish\Labb 4.runtimeconfig.json
+C:\Users\Pelle\OneDrive\Kod\Source\Repos\Labb 4\Labb 4\bin\Release\net6.0\app.publish\Labb 4.pdb

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Labb_4
 {
-    internal class Gender
+    public enum Gender
     {
+        Man,
+        Kvinna,
+        Annat
     }
 }
