@@ -25,7 +25,7 @@ namespace Labb_4
             int year;
             int month;
             string strToInt;
-            int intFromString;
+            int intFromStr;
             int day = 0;
             string testString;
             string eyeColor;
@@ -76,24 +76,31 @@ namespace Labb_4
             }
             void CheckInput()
             {
-                input = Console.ReadKey();
-                inputChar = input.KeyChar;
-                if (!char.IsDigit(inputChar))
+                do
                 {
-                    Console.Write("Använd siffror: ");
-                    return;
-                }
-                else
-                {
-                    choice = int.Parse(inputChar.ToString());
-                    Console.WriteLine();
-                }
-                while (choice < 0 || choice > 4)
-                {
+                    input = Console.ReadKey();
+                    inputChar = input.KeyChar;
+                    if (!char.IsDigit(inputChar))
+                    {
+                        Console.Write("Använd siffror: ");
 
-                    Console.Write("1 till 4 finns att välja på: ");
-                    continue;
-                }
+                    }
+                    else
+                    {
+                        choice = int.Parse(inputChar.ToString());
+                        Console.WriteLine();
+                    }
+
+                    if (choice < 0 || choice > 4)
+                    {
+
+                        Console.Write("1 till 4 finns att välja på: ");
+                        input = Console.ReadKey();
+                        continue;
+                    }
+                } while (choice < 0 || choice > 4);
+
+
             }
             void AddPerson()
             {
@@ -266,9 +273,9 @@ namespace Labb_4
                 while (true)
                 {
                     strToInt = Console.ReadLine();
-                    if (int.TryParse(strToInt, out intFromString))
+                    if (int.TryParse(strToInt, out intFromStr))
                     {
-                        return intFromString;
+                        return intFromStr;
                     }
                     else
                     {
