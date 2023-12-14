@@ -203,6 +203,9 @@ namespace Labb_4
                                 {
                                     Console.Write($"{year} var inte ett skottår så några 29 dagar fanns det inte i februari då, försök igen: ");
                                 }
+                                /*Det här är den första av två delar i programmet jag inte skrivit själv. Hämtad från chatGPT rakt av. 
+                                Det är if-villkoret som jag hämtat, att ha en matematiskt formel i huvdet för att räkna ut vad som är ett skottår är väl inte rimligt tycker jag.
+                                Jag förstår vad den gör. Kollar så att året inte är delbart med 4 eller om det är delbart med 100 och att det inte är delbart med 400 */
                             }
                             else
                             {
@@ -218,18 +221,26 @@ namespace Labb_4
             }
             void CheckGender()
             {
-                while (!Enum.TryParse(Console.ReadLine(), true, out gender) || !Enum.IsDefined(typeof(Gender), gender))
+                while (!Enum.TryParse(Console.ReadLine(), true, out gender))
                 {
                     Console.Write("Man, Kvinna eller Annat: ");
-                    continue;
                 }
+
+                /*Det här är den andra delen i programmet som jag inte skrivit själv. Kopierad rakt av från chatGPT. Hade jag inte förstått vad koden gör hade jag inte använt den.
+                Dock ska sägas att förslaget jag fick var while (!Enum.TryParse(Console.ReadLine(), true, out gender) || !Enum.IsDefined(typeof(Gender), gender)) men när jag dök djupare i vad delarna gjorde insåg jag att jag kunde ta bort IsDefined.
+                Att jag kör IsStringAString beror på att annars hade 0, 1 och 2 varit acceptabla värden för !Enum.TryParse som matchas mot index i enum istället för sjävla ordet. 
+                Jag tror även att alla tal hade fungerat genom input % antal i enum. Ex 5 % 3 = 3 / 3 med resten 2 som hade gett oss Gender.Annat.
+                Jag skrev en egen lösning där jag först testade en if-sats med if (int.TryParse) else if (input == "Man" || input == "Kvinna osv)  {gender = Gender.input}. Men det gick ju inte. 
+                Så då gjorde jag en else if för varje kön: else if (input == "Man" || input == "man") {gender = Gender.Man} osv. 
+                Aldrig arbetat med en enum innan så började från scratch.
+                Det här var innan jag skapat metoden IsStringAString som senare hade fått tagit över för Try.Parse om jag hade använt den koden
+                Mycket kod för något simpelt så jag ville lära mig hur man gjorde det effektivare och ser ingen mening med att skriva om koden från chatGPT i det här fallet mer än att ta bort det som var överflödigt.*/
             }
             void CheckHair()
             {
                 while (!int.TryParse(Console.ReadLine(), out hairLenght))
                 {
                     Console.Write("Längden anger vi med siffror: ");
-                    continue;
                 }
             }
             void CreateInstance()
@@ -353,7 +364,7 @@ namespace Labb_4
                     if (string.IsNullOrEmpty(testString))
                     {
                         Console.Write("Något behöver du allt skriva: ");
-                        continue;
+                        
                     }
                     else if (testString.All(char.IsLetter))
                     {
@@ -362,7 +373,7 @@ namespace Labb_4
                     else
                     {
                         Console.Write("Inga sifror här. Försök igen: ");
-                        continue;
+                        
                     }
                 }
             }
