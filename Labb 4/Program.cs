@@ -30,7 +30,7 @@ namespace Labb_4
             string hairColor;
             int hairLenght;
             string searchName;
-            int counter;
+            bool personFound = false;
             #endregion
 
             while (switchLoop)
@@ -133,7 +133,6 @@ namespace Labb_4
             void SearchPerson()
             {
                 Console.Clear();
-                counter = 0;
                 if (personList.Count == 0)
                 {
                     Console.WriteLine("Det finns inga personer i listan.");
@@ -147,20 +146,20 @@ namespace Labb_4
                     Console.Clear();
                     foreach (Person person in personList)
                     {
+
                         if (person.FirstName == searchName)
                         {
                             Console.Write(person);
                             Console.WriteLine("\n\nEnter för att fortsätta.");
                             Console.ReadLine();
                             Console.Clear();
-                            counter++;
-                        }
-                        else if (counter == 0)
-                        {
-                            Console.WriteLine($"{searchName} finns inte med i listan");
-                            Console.ReadLine();
-                            Console.Clear();
-                        }
+                        }                    
+                    }
+                    if (!personFound)
+                    {
+                        Console.WriteLine($"{searchName} finns inte med i listan");
+                        Console.ReadLine();
+                        Console.Clear();
                     }
                 }
 
@@ -168,7 +167,6 @@ namespace Labb_4
             void DeletePerson()
             {
                 Console.Clear();
-                counter = 0;
                 if (personList.Count == 0)
                 {
                     Console.WriteLine("Det finns inga personer i listan.");
@@ -187,18 +185,19 @@ namespace Labb_4
                             Console.WriteLine($"\n{searchName} är borttagen");
                             Console.ReadLine();
                             Console.Clear();
+                            personFound = true;
                             if (personList.Count == 0)
                             {
                                 break;
                             }
-                            counter++;
-                        }
-                        else if (counter == 0)
-                        {
-                            Console.WriteLine($"{searchName} finns inte med i listan");
-                            Console.ReadLine();
-                            Console.Clear();
-                        }
+                        }                     
+                    }
+
+                    if (personFound == false)
+                    {
+                        Console.WriteLine($"{searchName} finns inte med i listan");
+                        Console.ReadLine();
+                        Console.Clear();
                     }
                 }
             }

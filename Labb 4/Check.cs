@@ -177,7 +177,7 @@ namespace Labb_4
             while (!Enum.TryParse(genderString, true, out gender))
             {
                 Console.Write("Man, Kvinna eller Annat: ");
-                genderString = Console.ReadLine()!;
+                genderString = IfString();
             }
             return gender;
         }
