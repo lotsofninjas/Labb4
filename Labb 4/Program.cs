@@ -136,6 +136,7 @@ namespace Labb_4
                 if (personList.Count == 0)
                 {
                     Console.WriteLine("Det finns inga personer i listan.");
+                    Console.WriteLine("\n\nEnter för att fortsätta.");
                     Console.ReadLine();
                     Console.Clear();
                 }
@@ -171,6 +172,7 @@ namespace Labb_4
                 if (personList.Count == 0)
                 {
                     Console.WriteLine("Det finns inga personer i listan.");
+                    Console.WriteLine("\n\nEnter för att fortsätta.");
                     Console.ReadLine();
                     Console.Clear();
                 }
@@ -178,11 +180,11 @@ namespace Labb_4
                 {
                     Console.Write("Ange förnamn att söka efter: ");
                     searchName = Check.IfString();
-                    foreach (Person person in personList)
+                    for (int i = personList.Count - 1; i >= 0; i--)
                     {
-                        if (person.FirstName == searchName)
+                        if (personList[i].FirstName == searchName)
                         {
-                            personList.Remove(person);
+                            personList.RemoveAt(i);
                             Console.WriteLine($"\n{searchName} är borttagen");
                             Console.ReadLine();
                             Console.Clear();
