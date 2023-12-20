@@ -153,6 +153,7 @@ namespace Labb_4
                             Console.WriteLine("\n\nEnter för att fortsätta.");
                             Console.ReadLine();
                             Console.Clear();
+                            personFound = true;
                         }                    
                     }
                     if (!personFound)
@@ -193,7 +194,7 @@ namespace Labb_4
                         }                     
                     }
 
-                    if (personFound == false)
+                    if (!personFound)
                     {
                         Console.WriteLine($"{searchName} finns inte med i listan");
                         Console.ReadLine();
