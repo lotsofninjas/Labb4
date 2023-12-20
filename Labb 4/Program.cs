@@ -132,6 +132,8 @@ namespace Labb_4
             }
             void SearchPerson()
             {
+                personFound = false;
+
                 Console.Clear();
                 if (personList.Count == 0)
                 {
@@ -147,7 +149,6 @@ namespace Labb_4
                     Console.Clear();
                     foreach (Person person in personList)
                     {
-
                         if (person.FirstName == searchName)
                         {
                             Console.Write(person);
@@ -157,6 +158,7 @@ namespace Labb_4
                             personFound = true;
                         }                    
                     }
+
                     if (!personFound)
                     {
                         Console.WriteLine($"{searchName} finns inte med i listan");
@@ -168,6 +170,8 @@ namespace Labb_4
             }
             void DeletePerson()
             {
+                personFound = false;
+
                 Console.Clear();
                 if (personList.Count == 0)
                 {
