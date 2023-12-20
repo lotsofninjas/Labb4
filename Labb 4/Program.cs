@@ -13,8 +13,8 @@ namespace Labb_4
     {
         private static void Main(string[] args)
         {
-            #region variables and lists
-            List<Person> personList = new List<Person>();
+            #region variables and stuff
+            List<Person> personList = new();
             int choice;
             bool switchLoop = true;
             string firstName;
