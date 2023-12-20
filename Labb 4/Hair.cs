@@ -9,7 +9,7 @@ namespace Labb_4
     public struct Hair
     {
         public string HairColor { get; set; }
-        public double HairLength { get; set; }
+        public int HairLength { get; set; }
 
     }
 }

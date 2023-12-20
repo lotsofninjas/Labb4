@@ -9,12 +9,12 @@ namespace Labb_4
 {
     public class Person
     {
-        public string FirstName { get; private set; }
-        private string LastName { get; set; }
-        private DateTime DateOfBirth { get; set; }
-        private string EyeColor { get; set; }
-        private Gender Gender { get; set; }
-        private Hair Hair { get; set; }
+        public string FirstName { get; }
+        private string LastName { get; }
+        private DateTime DateOfBirth { get; }
+        private string EyeColor { get; }
+        private Gender Gender { get; }
+        private Hair Hair { get; }
 
 
 
